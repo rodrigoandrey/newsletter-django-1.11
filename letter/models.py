@@ -1,4 +1,5 @@
 from django.db import models
+from letter.validators import validate_phone
 
 
 class BaseMixin(models.Model):
@@ -10,17 +11,25 @@ class BaseMixin(models.Model):
         abstract = True
 
 
-# usuário precisa inserir - Nome, sobrenome, e-mail, telefone, Motivo de inscrição.
-class NewsLetter(BaseMixin):
+# Usuário precisa inserir - Nome, sobrenome, e-mail, telefone, Motivo de inscrição.
+class Subscribers(BaseMixin):
     name = models.CharField('Nome', max_length=80, null=False, blank=False)
     lastname = models.CharField('Sobrenome', max_length=80, null=False, blank=False)
     email = models.EmailField('Email', null=False, blank=False, unique=True)
     phone = models.CharField('Telefone', max_length=15, null=True, blank=True)
-    reason = models.CharField('Motivo de Inscrição', max_length=100, null=True, blank=True)
+    reason = models.CharField('Motivo da Inscrição', max_length=100, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if self.phone:
+            self.phone = validate_phone(self.phone)
+        self.name = self.name.title()
+        self.lastname = self.lastname.title()
+        self.email = self.email.lower()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.email
 
     class Meta:
-        verbose_name = 'Newsletter'
-        verbose_name_plural = 'Newsletters'
+        verbose_name = 'Subscriber'
+        verbose_name_plural = 'Subscribers'

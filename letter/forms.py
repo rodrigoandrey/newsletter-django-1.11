@@ -1,10 +1,11 @@
 from django import forms
-from letter.models import NewsLetter
+from letter.models import Subscribers
+from letter.validators import validate_phone
 
 
-class NewsLetterForm(forms.ModelForm):
+class SubscribersForm(forms.ModelForm):
     class Meta:
-        model = NewsLetter
+        model = Subscribers
         fields = (
             'name',
             'lastname',

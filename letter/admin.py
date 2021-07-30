@@ -1,12 +1,12 @@
 from django.contrib import admin
-from letter.models import NewsLetter
+from letter.models import Subscribers
 
 
-class NewsLetterAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'lastname', 'email', 'created_at', 'status', )
+class SubscribersAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'lastname', 'email', 'phone', 'created_at', 'status', )
     list_display_links = ('name', 'lastname', 'email', )
     search_fields = ('id', 'name', 'email',)
-    list_per_page = 30
+    list_per_page = 10
 
 
-admin.site.register(NewsLetter, NewsLetterAdmin)
+admin.site.register(Subscribers, SubscribersAdmin)
