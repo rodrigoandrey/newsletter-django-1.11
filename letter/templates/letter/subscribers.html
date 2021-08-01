@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}Lista de Inscritos{% endblock %}
 {% block content %}
-<div class="container">
-    <div class="row mt-2">
-        <div class="col-12">
+<div class="container" style="border-radius: 15px; box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);">
+    <div class="row mt-3">
+        <div class="col-xl-12 mt-3">
             <h2 style="color:#343a40;" >Lista de Inscritos</h2>
         </div>
     </div>
-    <div class="row mt-3">
-        <div class="col-xl-11">
+    <div class="row mt-2 mb-5">
+        <div class="col-xl-12">
             <div class="table-responsive-xl">
                 <table class="table table-hover">
                   <thead class="thead-dark">
@@ -35,17 +35,15 @@
                     </tr>
                   {% endfor %}
                   </tbody>
+                    <div class="d-flex justify-content-end">
+                        {% include 'partials/_pagination.html' %}
+                    </div>
                 </table>
+                <div class="d-flex justify-content-end">
+                    {% include 'partials/_pagination.html' %}
+                </div>
             </div>
         </div>
-        <div class="container">
-    <div class="row ">
-        <div class="col-xl-12">
-            {% include 'partials/_pagination.html' %}
-        </div>
     </div>
 </div>
-    </div>
-</div>
-
 {% endblock %}
