@@ -33,6 +33,3 @@ class SubscribersListView(LoginRequiredMixin, ListView):
         qs = qs.order_by('-id').filter(status=True)
 
         return qs
-
-
-
