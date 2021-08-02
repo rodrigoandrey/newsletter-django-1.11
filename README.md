@@ -3,7 +3,7 @@
 
 - Python==3.6.8
 - Django==1.11
-- Bootstrap==4.1.3 (CDN)
+- Bootstrap==4.1.1 (Dependence)
 
 ### Instalation:
 - clone project
@@ -13,7 +13,7 @@
   - python manage.py makemigrations
   - python manage.py migrate
   - python manage.py createsuperuser
-    - setup a super user
+    - setup a superuser
   - python manage.py runserver (default: localhost:8000/)
 
-###Still in development
+Still in development
