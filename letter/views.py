@@ -1,27 +1,34 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.contrib import messages
-from django.views.generic import CreateView, ListView, TemplateView
+from django.views.generic import ListView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from letter.models import Subscribers
 from letter.forms import SubscribersForm
 
 
+# Home View
 class HomeTemplateView(TemplateView):
     template_name = 'letter/index.html'
 
 
-class SubscribersCreateView(CreateView):
-    model = Subscribers
-    form_class = SubscribersForm
-    template_name = 'letter/newsletter.html'
+# Registro da newsletter
+def subscriber_register(request):
+    if request.method == 'POST':
+        form = SubscribersForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Inscrição realizada com sucesso.')
+            return redirect('/newsletter')
+    else:
+        form = SubscribersForm()
 
-    def form_valid(self, form):
-        subscriber = Subscribers(**form.cleaned_data)
-        subscriber.save()
-        messages.success(self.request, 'Inscrição realizada com sucesso')
-        return redirect('/newsletter')
+    context = {
+        'form': form,
+    }
+    return render(request, 'letter/newsletter.html', context)
 
 
+# Listagem dos subscribers
 class SubscribersListView(LoginRequiredMixin, ListView):
     model = Subscribers
     template_name = 'letter/subscribers.html'

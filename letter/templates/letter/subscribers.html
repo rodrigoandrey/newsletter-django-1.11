@@ -1,49 +1,53 @@
 {% extends 'base.html' %}
 {% block title %}Lista de Inscritos{% endblock %}
 {% block content %}
-<div class="container" style="border-radius: 15px; box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);">
-    <div class="row mt-3">
-        <div class="col-lg-4 mt-3">
-            <h2 style="color:#343a40;" >Lista de Inscritos</h2>
-        </div>
-    </div>
-    <div class="row mt-2 mb-5">
-        <div class="col-xl-12">
-            <div class="table-responsive-xl">
-                <table class="table table-hover">
-                  <thead class="thead-dark">
-                    <tr>
-                      <th scope="col">Id</th>
-                      <th scope="col">Nome</th>
-                      <th scope="col">Sobrenome</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Phone</th>
-                      <th scope="col">Motivo</th>
-                      <th scope="col">Inscrito em</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {% for subscriber in subscribers %}
-                    <tr>
-                      <th scope="row">{{ subscriber.id }}</th>
-                      <td>{{ subscriber.name }}</td>
-                      <td>{{ subscriber.lastname }}</td>
-                      <td>{{ subscriber.email }}</td>
-                      <td>{{ subscriber.phone }}</td>
-                      <td>{{ subscriber.reason }}</td>
-                      <td>{{ subscriber.created_at }}</td>
-                    </tr>
-                  {% endfor %}
-                  </tbody>
-                    <div class="d-flex justify-content-end">
-                        {% include 'partials/_pagination.html' %}
+<main>
+    <section>
+        <div class="container" id="subscribers-con">
+            <div class="row mt-3">
+                <div class="col-lg-4 mt-3">
+                    <h2>Lista de Inscritos</h2>
+                </div>
+            </div>
+            <div class="row mt-2 mb-5">
+                <div class="col-xl-12">
+                    <div class="table-responsive-xl">
+                        <table class="table table-hover">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Sobrenome</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Motivo</th>
+                                <th scope="col">Inscrito em</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for subscriber in subscribers %}
+                            <tr>
+                                <th scope="row">{{ subscriber.id }}</th>
+                                <td>{{ subscriber.name }}</td>
+                                <td>{{ subscriber.lastname }}</td>
+                                <td>{{ subscriber.email }}</td>
+                                <td>{{ subscriber.phone }}</td>
+                                <td>{{ subscriber.reason }}</td>
+                                <td>{{ subscriber.created_at }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                            <div class="d-flex justify-content-end">
+                                {% include 'partials/_pagination.html' %}
+                            </div>
+                        </table>
+                        <div class="d-flex justify-content-end">
+                            {% include 'partials/_pagination.html' %}
+                        </div>
                     </div>
-                </table>
-                <div class="d-flex justify-content-end">
-                    {% include 'partials/_pagination.html' %}
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+</main>
 {% endblock %}

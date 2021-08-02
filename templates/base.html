@@ -6,17 +6,11 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-
 <!-- Navbar -->
     {% include 'partials/_navbar.html' %}
-<main>
-    <section style="margin-top: 5em;">
-        {% block content %} {% endblock %}
-    </section>
-</main>
-
+<!-- Main Block -->
+   {% block content %} {% endblock %}
 <!-- Scripts -->
     {% include 'partials/_scripts.html' %}
-
 </body>
 </html>
