@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}Lista de Inscritos{% endblock %}
 {% block content %}
-<main>
-    <section>
-        <div class="container" id="subscribers-con">
-            <div class="row mt-3">
+        <div class="container card-custom" id="subscribers-con">
+            <div class="row mt-3 mb-3 border-bottom">
                 <div class="col-lg-6 mt-3">
                     <h2>Lista de Inscritos</h2>
                 </div>
@@ -22,7 +20,7 @@
                         {% include 'partials/_pagination.html' %}
                     </div>
                     <div class="table-responsive-xl mb-5">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="myTable2">
                             <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Id</th>
@@ -56,6 +54,4 @@
             </div>
             {% endif %}
         </div>
-    </section>
-</main>
 {% endblock %}

@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,13 +40,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'letter',
+    'accounts',
     'crispy_forms',
     'bootstrap4',
 ]
 
+AUTH_USER_MODEL = 'accounts.CustomUserModel'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -64,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -72,6 +79,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'newsletter.wsgi.application'
 
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -104,8 +114,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'index'
-LOGIN_URL = '/admin/login'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -130,3 +140,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEIDA_URL = '/media/'
+
+GRAPPELLI_ADMIN_TITLE = 'Newsletter'
+
+BOOTSTRAP4 = {
+    'required_css_class': '',
+}
+
+gettext = lambda s: s
+LANGUAGES = (
+    ('pt-br', gettext('Portugues-Brasil')),
+    ('en', gettext('English')),
+    ('es', gettext('Spanish')),
+)
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'pt-br'
+MODELTRANSLATION_AUTO_POPULATE = True

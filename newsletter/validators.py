@@ -1,6 +1,6 @@
-import re
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
+import re
 
 
 # Metodo de Normalização de numero de telefone para inserção no DB

@@ -1,8 +1,10 @@
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import redirect, render
+from django.views.generic import TemplateView, ListView
 from django.contrib import messages
-from django.views.generic import ListView, TemplateView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from letter.models import Subscribers
+from letter.models import Subscribers, News
 from letter.forms import SubscribersForm
 
 
@@ -11,15 +13,23 @@ class HomeTemplateView(TemplateView):
     template_name = 'letter/index.html'
 
 
+class NewsTemplateView(ListView):
+    template_name = 'letter/news.html'
+    model = News
+    queryset = News.objects.all()
+    context_object_name = 'news'
+
+
 # Registro da newsletter
 def subscriber_register(request):
     if request.method == 'POST':
         form = SubscribersForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Inscrição realizada com sucesso.')
+            messages.success(request, 'Inscrição realizada com sucesso.', extra_tags='sucesso')
             return redirect('/newsletter')
     else:
+        messages.info(request, 'Preencha os campos para realizar o cadastro.', extra_tags='infomarcao')
         form = SubscribersForm()
 
     context = {
@@ -29,14 +39,21 @@ def subscriber_register(request):
 
 
 # Listagem dos subscribers
-class SubscribersListView(LoginRequiredMixin, ListView):
-    model = Subscribers
-    template_name = 'letter/subscribers.html'
-    context_object_name = 'subscribers'
-    paginate_by = 10
+@login_required
+@staff_member_required
+def subscriber_view(request):
+    subscribers = Subscribers.objects.all().order_by('-id').filter(status=True)
+    # email_list = subscribers.values_list('email', flat=True)
+    paginate_by = Paginator(subscribers, 6)
+    page_number = request.GET.get('page', 1)
+    try:
+        page = paginate_by.page(page_number)
+    except EmptyPage:
+        page = paginate_by.page(1)
 
-    def get_queryset(self):
-        qs = super().get_queryset()
-        qs = qs.order_by('-id').filter(status=True)
+    context = {
+        'subscribers': page,
+        'page_obj': page,
+    }
 
-        return qs
+    return render(request, 'letter/subscribers.html', context)

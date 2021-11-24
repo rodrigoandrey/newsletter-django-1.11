@@ -1,4 +1,4 @@
-{% if is_paginated %}
+{% if page_obj.paginator.num_pages > 1 %}
 <div class="pagination">
     <ul class="pagination">
         {% if page_obj.has_previous %}

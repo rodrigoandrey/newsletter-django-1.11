@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Logar-se{% endblock %}
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
+{% block content %}
+        <div class="container mt-3">
+            {% include 'partials/_messages.html' %}
+            <div class="row mt-3">
+                <div class="col-lg-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Teste</h3>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>DESCONECTADO</h3>
+                            <div class="border-top pt-3 mt-3" style="text-align: center;">
+                                <small class="text-muted d-flex">
+                                   Você foi desconectado, deseja entrar novamente?<a class="ml-2" href="{% url 'login' %}">Entrar</a>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

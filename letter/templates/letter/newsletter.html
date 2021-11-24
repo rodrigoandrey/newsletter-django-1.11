@@ -2,15 +2,17 @@
 {% block title %}Inscreva-se{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-<main>
-    <section>
         <div class="container mt-3">
             <div class="row mt-3">
                 <div class="col-xl-6 offset-xl-3">
                     {% for message in messages %}
-                    <div class="alert alert-success">
-                        {{ message }}
-                    </div>
+                        {% if message %}
+                            {% if message.extra_tags == 'sucesso' %}
+                                <div class="alert alert-success">
+                                    {{ message }}
+                                </div>
+                            {% endif %}
+                        {% endif %}
                     {% endfor %}
                     <div class="card">
                         <div class="card-body">
@@ -19,8 +21,8 @@
                             <form method="POST">
                                 {% csrf_token %}
                                 {{ form|crispy }}
-                                <div class="col-sm-6 offset-sm-3">
-                                    <input class="btn btn btn-dark btn-block" type="submit" value="Inscrever-se">
+                                <div class="col-sm-12 p-0 mt-5">
+                                    <input class="btn btn btn-dark btn-block shadow-lg" type="submit" value="Inscrever-se">
                                 </div>
                             </form>
                         </div>
@@ -28,6 +30,4 @@
                 </div>
             </div>
         </div>
-    </section>
-</main>
 {% endblock %}

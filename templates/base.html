@@ -6,11 +6,14 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-<!-- Navbar -->
+<main>
+    <!-- Navbar -->
     {% include 'partials/_navbar.html' %}
 <!-- Main Block -->
-   {% block content %} {% endblock %}
+    {% block content %} {% endblock %}
 <!-- Scripts -->
     {% include 'partials/_scripts.html' %}
+</main>
+
 </body>
 </html>

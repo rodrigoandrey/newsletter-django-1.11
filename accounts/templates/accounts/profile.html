@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}Profile Teste{% endblock %}
+{% block content %}
+<div class="container card-custom">
+    <div class="row mt-3">
+        <div class="col-lg-12 mt-3 mb-3 border-bottom">
+            <h2>Informações Pessoais.</h2>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-xl-12 mb-5">
+            <h4>#{{ user.id }}</h4>
+            <h4>{{ user.get_full_name }}</h4>
+            <h4>{{ user.email }} </h4>
+        </div>
+        <div class="col-xl-4 mb-5">
+            <form action="{% url 'set_language' %}" method="POST">{% csrf_token %}
+                <div class="form-group">
+                    <input name="next" type="hidden" value="/news/" />
+                </div>
+                <div class="form-group">
+                    <select  class="custom-select mr-sm-2" name="language">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                            {{ language.name_local|title }} ({{ language.code }})
+                        </option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-dark" type="submit" value="Change"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -2,28 +2,29 @@ h1, h2, h3 {
     color: #343a40;
 }
 
-.navbar {
-    height: 4em;
-}
 
-section {
+main {
 	margin-top: 6em;
 	margin-bottom: 3em;
 }
 
 .card {
 	border: 0px;
-	border-radius: 15px;
+	border-radius: 8px;
 	box-shadow: 0 .4rem 1rem rgba(0,0,0,.15);
 }
 .card-body {
 	font-weight: bold;
+	padding: 3em;
 }
 
-#subscribers-con {
+.card-custom {
     border: 0px;
-	border-radius: 15px;
+	border-radius: 10px;
 	box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+	padding-left: 4em;
+    padding-right: 4em;
+    padding-top: 2em;
 }
 
 .page-link {
@@ -42,4 +43,14 @@ section {
     color: #fff;
     background-color: #343a40;
     border-color: #343a40ed;
+}
+
+.btn {
+    border-radius: 8px;
+}
+
+.alert {
+    border-radius: 8px;
+    box-shadow: 0 .4rem 1rem rgba(0,0,0,.15);
+    border-color: transparent;
 }
